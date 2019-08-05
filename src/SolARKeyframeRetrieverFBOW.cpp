@@ -68,8 +68,8 @@ FrameworkReturnCode SolARKeyframeRetrieverFBOW::addKeyframe(SRef<Keyframe> keyfr
 	v_bow = m_VOC.transform(desc_OpenCV);
 
 	// add bow desc and keyfram to the lists
-	m_list_KFBoW.push_back(v_bow);
-	m_list_keyframes.push_back(keyframe);
+    m_list_KFBoW.emplace_back(v_bow);
+    m_list_keyframes.emplace_back(keyframe);
 
     return FrameworkReturnCode::_SUCCESS;
 }
@@ -99,7 +99,7 @@ FrameworkReturnCode SolARKeyframeRetrieverFBOW::retrieve(const SRef<Frame> frame
 	if (max_score < m_threshold)
 		return FrameworkReturnCode::_ERROR_;
 
-	keyframes.push_back(m_list_keyframes[index_nearest_kf]);
+    keyframes.emplace_back(m_list_keyframes[index_nearest_kf]);
     return FrameworkReturnCode::_SUCCESS;
 }
 
